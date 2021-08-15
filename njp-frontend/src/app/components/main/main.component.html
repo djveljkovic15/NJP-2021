@@ -1,0 +1,24 @@
+
+
+<body>
+    <div class= "header"><app-header></app-header></div>
+
+    <div class="Site-content">
+        
+        <!-- <p>main works!</p> -->
+
+        <div class="col-sm-9" style="background-color:lavenderblush;">
+            <app-main-admin-createuser *ngIf="showAdminCreateUser"> user </app-main-admin-createuser>
+            <app-main-admin-createticket *ngIf="showAdminCreateTicket"> ticket </app-main-admin-createticket>
+
+            <!-- <app-main-user-searchform *ngIf="showUserSearchForm"> search </app-main-user-searchform> -->
+
+            <app-main-table-tickets> table-tickets </app-main-table-tickets>
+        </div>
+        
+
+
+    </div>
+
+    <div class= "footer"><app-footer></app-footer></div>
+</body>

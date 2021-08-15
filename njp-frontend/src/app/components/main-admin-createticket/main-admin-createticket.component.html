@@ -1,0 +1,60 @@
+<!-- <p>main-admin-createticket works!</p> -->
+
+
+<div class="col-md-9 offset-md-3">
+    <div class="col-7" id="block1">
+        <h3>Create Ticket</h3>
+        <form form name="ticketForm" #ticketForm="ngForm" (ngSubmit)="createTicket(ticketForm)">   
+            
+            <div class="form-group">
+                <label>Flight</label>
+                <select name="flight" [(ngModel)]="selectedFlightId">
+                   <option *ngFor="let flight of flights" [value]="flight.id">{{flight.origin.name}} -> {{flight.destination.name}}</option>
+               </select>
+            </div>
+
+            <div class="form-group">
+                <label>Company</label>
+                <select name="company" [(ngModel)]="selectedCompanyId">
+                   <option *ngFor="let company of companies" [value]="company.id">{{company.name}}</option>
+               </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ticket Type</label>
+                <select name="type" [(ngModel)]="selectedType">
+                   <option *ngFor="let type of types" [value]="type">{{TypeLabel.get(type)}}</option>
+               </select>
+            </div>
+            
+            <div class="form-group">
+                <label>OneWay</label>
+                <select name="OneWay" [(ngModel)]="selectedOneWay">
+                   <option *ngFor="let yesno of yesnos" [value]="yesno">{{yesno}}</option>
+               </select>
+            </div>
+            <div class="form-group">
+                <label>Depart Date</label>
+                <input type="date" class="form-control" id="departDate" [(ngModel)]="departDate" name="departDate" required>
+            </div>
+                <!-- <select name="type" [(ngModel)]="selectedType">
+                   <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                </select> -->
+            <div *ngIf="selectedOneWay == 'No'" class="form-group">
+                <label>Return Date</label>
+                <input type="date" class="form-control" id="returnDate" [(ngModel)]="returnDate" name="returnDate" required>
+                
+            </div> 
+
+            <div class="form-group">
+                <label>Number of available tickets</label>
+                <input type="number" min="1" class="form-control" id="numberOfAvailableTickets" [(ngModel)]="numberOfAvailableTickets" name="numberOfAvailableTickets" required>
+                    
+            </div>
+
+            <button class="btn btn-success" type="submit">Submit</button>
+
+        </form>
+
+    </div>
+</div>

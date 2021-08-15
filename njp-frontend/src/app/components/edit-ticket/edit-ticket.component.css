@@ -1,0 +1,35 @@
+/* Stlyes to make the demo easier to see: */
+html{
+    height: 100%;
+  }
+  
+body { 
+    margin: 0; 
+    display: grid;
+    height: 100%;
+    grid-template-areas:
+        "header_section"
+        "Site-content_section"
+        "footer_section";
+    grid-template-rows: 150px 100% 50px; /* 100px for header, 100% for content section, 50px for footer */
+}
+.header { 
+    grid-area: header_section;
+    background-color: #FDD; 
+}
+.Site-content { 
+    grid-area: Site-content_section;
+    background-color: #DFD; 
+}
+.footer {
+    grid-area: footer_section;
+    background-color: #049e8c;
+}
+
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }

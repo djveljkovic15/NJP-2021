@@ -1,0 +1,87 @@
+<!-- <p>main-table-tickets works!</p> -->
+
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>One-way</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Depart</th>
+                <th>Return</th>
+                <th>Company</th>
+                <th>Ticket type</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+
+        <tbody ng-if="tickets?.length > 0">
+            <tr *ngFor="let ticket of tickets; let id = index">
+                <td>{{ ticket.oneWay }}</td>
+                <td>{{ ticket.flight.origin.name }}</td>
+                <td>{{ ticket.flight.destination.name }}</td>
+                <td>{{ ticket.departDate | date:'mediumDate' }}</td>
+                <td *ngIf="ticket.oneWay != true ">{{ ticket.returnDate | date:'mediumDate' }}</td>
+                <td *ngIf="ticket.oneWay == true "> /No return date/ </td>
+                <td>{{ ticket.company.name }}</td>
+                <td>{{ ticket.ticketType }}</td>
+                <td>{{ ticket.numberOfAvailableTickets }}</td>
+                
+
+            <div class="row">
+                <td>
+
+                    <button *ngIf="isAdmin" (click)="editTicket(ticket.id)" class="btn btn-info"> Update </button>
+                    <button *ngIf="isAdmin" (click)="deleteTicket(ticket.id)" class="btn btn-danger" style="margin-left: 10px;"> Delete </button>
+                    <!-- <button (click)="addUserToTeam(user.id)" class="btn btn-warning" style="margin-left: 10px;">Add To Team </button> -->
+                    <button *ngIf="!isAdmin && ticket.numberOfAvailableTickets!=0" (click)="reserveTicket(ticket)" class="btn btn-info"> Reserve </button>
+                    <input  *ngIf="!isAdmin && ticket.numberOfAvailableTickets!=0" type="number" min="1" max="{{tickets[id].numberOfAvailableTickets}}" [(ngModel)]="numberOfAvailableTickets[id]">
+                
+
+                </td>
+            </div>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <button (click)="paginateBack()" class="btn btn-info"> Back </button>
+
+    <button (click)="paginateNext()" class="btn btn-info"> Next </button>
+
+    <div *ngIf="!isAdmin" class="form-group">
+        <label> OneWay tickets? </label>
+        <select name="way" [(ngModel)]="selectedWay">
+           <option *ngFor="let way of ways" [value]="way"> {{ way }} </option> <!--Boze me sacuvaj kako sam ovo nazvao..-->
+       </select>
+       <button (click)="searchBasedOnWay()" class="btn btn-info"> Search </button>
+    </div>
+
+</div>
+
+<div>
+
+    
+    <form class="form-inline" (ngSubmit)="filterTickets()" name="filter">
+        <input type="text" class="form-control" id="filterOriginName" placeholder="Origin City" [(ngModel)]="ticketFilter.originName" name="filterOriginName">
+        <input type="text" class="form-control" id="filterDestinationName" placeholder="Destination City" [(ngModel)]="ticketFilter.destinationName" name="filterDestinationName">
+        <input type="date" class="form-control" id="filterDepartDate" placeholder="Depart date" [(ngModel)]="ticketFilter.departDate" name="filterDepartDate">
+        <input type="date" class="form-control" id="filterReturnDate" placeholder="Return date" [(ngModel)]="ticketFilter.returnDate" name="filterReturnDate">
+       
+        <button type="submit">Filter</button>
+    </form>
+    <button (click)="clearFilter()" class="btn btn-info"> Clear </button>
+</div>
+
+<!--
+    U nasem slucaju imacemo tabelu karata sa dva dugmeta ispod za sledece i prethodne rezultate. 
+    Tabela ce na osnovu toga da prikazuje odredjenih 10 karata. 
+    Svaki put kad se klikne neko od dugmica, potrebno je pozvati BE i popuniti tabelu sa odgovorajucih 10 karata.
+    Na FE ne sme biti ucitano vise od 10 karata sto znaci da se paginacija vrsi na BE. 
+
+    originName!: string
+    destinationName!: string
+    departDate!: string
+    returnDate!: string
+-->

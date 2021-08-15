@@ -1,0 +1,17 @@
+.card-image {
+    width: 75px;
+    height: 75px;
+ }
+
+ .container{
+   width: auto;
+   max-height: auto;
+   float: right;
+ }
+
+ .containerLogo{
+   width: auto;
+   max-height: auto;
+   float: left;
+ }
+

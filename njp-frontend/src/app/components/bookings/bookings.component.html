@@ -1,0 +1,45 @@
+<!-- <p>bookings works!</p> -->
+
+
+<body>
+    <div class= "header"><app-header></app-header></div>
+
+    <div class="Site-content">
+    
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ticket details</th>
+                <th>Reservation</th>
+            </tr>
+        </thead>
+
+        <tbody ng-if="bookings?.length > 0">
+            <tr *ngFor="let booking of bookings">
+                <td *ngIf="booking.ticket.oneWay != true ">{{ booking.ticket.company.name }}-
+                    [{{ booking.ticket.flight.origin.name }},{{ booking.ticket.flight.destination.name }}]-
+                    ({{ booking.ticket.departDate | date:'mediumDate'}}-{{ booking.ticket.returnDate | date:'mediumDate'}})</td>
+                <td *ngIf="booking.ticket.oneWay == true ">{{ booking.ticket.company.name }}-
+                    [{{ booking.ticket.flight.origin.name }},{{ booking.ticket.flight.destination.name }}]-
+                    ({{ booking.ticket.departDate | date:'mediumDate'}})  </td>
+                <td> {{ TypeLabel.get(booking.isAvailable) }} </td>
+
+            <div class="row">
+                <td>
+                    <button (click)="cancelBooking(booking.id)"> Cancel </button>
+                    <button (click)="buyoutBooking(booking.id)"> Buy </button>
+                    <!-- *ngIf="ticket.numberOfAvailableTickets!=0"  -->
+
+                </td>
+            </div>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+
+    <div class= "footer"><app-footer></app-footer></div>
+</body>

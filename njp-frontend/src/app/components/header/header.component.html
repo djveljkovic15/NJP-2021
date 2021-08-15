@@ -1,0 +1,27 @@
+<nav class="navbar">
+
+    <!-- logo -->
+    <div class="containerLogo">
+      <a>
+        <img src="../../../assets/images/air-njp.png">
+      </a>
+    </div>
+  
+    
+    <div class="container">
+      <button type="button " class="btn btn-outline-secondary " (click)="logout() " *ngIf="isLoggedIn"> Logout </button>
+    </div>
+
+    <div *ngIf="!isAdmin" class="container">
+      <a (click)="showUserBookings()">
+        <img class="card-image" src="../../../assets/images/shopping-cart.png">
+        <!-- <img src="../../../assets/images/shop-cart-icon.PNG"> -->
+      </a>
+      {{numberOfBookings}}
+    </div>
+    
+    <div class="container">
+      {{username}} {{userType}} 
+    </div>
+
+  </nav>

@@ -1,0 +1,79 @@
+<!-- <p>edit-ticket works!</p> -->
+
+        
+
+
+<body>
+    <div class= "header"><app-header></app-header></div>
+
+    <div class="Site-content">
+    
+<div class="col-md-9 offset-md-3">
+    <div class="col-7" id="block1">
+        <h3>Update Ticket</h3>
+        <form (ngSubmit)="updateTicket()">
+            <div class="form-group">
+                <label>Company</label>
+                <select name="company" [(ngModel)]="company">
+                    <option *ngFor="let company of companies" [value]="company"> {{ company.name }} </option> 
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ticket type</label>
+                <select name="way" [(ngModel)]="selectedTicketType">
+                    <!-- <select name="way" [(ngModel)]="ticket.ticketType"> -->
+                    <option *ngFor="let ticketType of ticketTypes" [value]="ticketType"> {{ TypeLabel.get(ticketType) }} </option> 
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Flight</label>
+                <select name="flight" [(ngModel)]="flight">
+                   <option *ngFor="let flight of flights" [value]="flight">{{flight.origin.name}} -> {{flight.destination.name}}</option>
+               </select>
+            </div>
+            <div class="form-group">
+                <label>One way</label>
+                <select name="way" [(ngModel)]="selectedOneWay">
+                    <option *ngFor="let way of ways" [value]="way"> {{ way }} </option> 
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Depart Date</label>
+                <input type="date" class="form-control" id="departDate" [(ngModel)]="departDate" name="departDate" required>
+            </div>
+
+            <div *ngIf="selectedOneWay == 'No'"  class="form-group">
+                <label>Return Date</label>
+                <input type="date" class="form-control" id="returnDate" [(ngModel)]="returnDate" name="returnDate" required>
+            </div>
+
+            <div class="form-group">
+                <label>Number of available tickets</label>
+                <input type="number" min="1" class="form-control" id="numberOfAvailableTickets" [(ngModel)]="numberOfAvailableTickets" name="numberOfAvailableTickets" required>
+            </div>
+
+            <button class="btn btn-success" type="submit">Submit update</button>
+
+        </form>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()"> Back </button>
+    </div>
+</div>
+
+    
+</div>
+
+<div class= "footer"><app-footer></app-footer></div>
+</body>
+
+<!-- 
+    <div class="form-group">
+        <label>Origin</label>
+        <input type="text" class="form-control" id="origin" [(ngModel)]="ticket.flight.origin.name" name="origin" required>
+    </div>
+
+    <div class="form-group">
+        <label>Destination</label>
+        <input type="text" class="form-control" id="destination" [(ngModel)]="ticket.flight.destination.name" name="destination" required>
+    </div> -->
